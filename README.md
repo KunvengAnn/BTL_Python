@@ -7,8 +7,8 @@ Tạo bảng Movies để lưu thông tin về phim:
 + image: Đường dẫn hình ảnh của phim
 + vote_average: Đánh giá của phim
 - có SP_GETTopTenMovies 
-+ Module đọc dữ liệu:
-2. Sử dụng Python và FastAPI để tạo một API để lấy dữ liệu từ trang web chuyên về phim như: api.themoviedb.org.
+2. Module đọc dữ liệu:
+Sử dụng Python và FastAPI để tạo một API để lấy dữ liệu từ trang web chuyên về phim như: api.themoviedb.org.
   
 Mô tả nguồn dữ liệu:
 + Sử dụng Web Scraping hoặc lấy dữ liệu qua API của các trang web chuyên về phim.
