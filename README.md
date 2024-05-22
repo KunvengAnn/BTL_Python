@@ -9,6 +9,7 @@ Tạo bảng Movies để lưu thông tin về phim:
 # có SP_GETTopTenMovies 
 + Module đọc dữ liệu:
 2. Sử dụng Python và FastAPI để tạo một API để lấy dữ liệu từ trang web chuyên về phim như: api.themoviedb.org.
+  
 Mô tả nguồn dữ liệu:
 + Sử dụng Web Scraping hoặc lấy dữ liệu qua API của các trang web chuyên về phim.
 +Dữ liệu bao gồm thông tin về phim:
