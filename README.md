@@ -2,16 +2,16 @@ Make by : KUN VENG ANN, CPC205013, K56KMT.01 - TNUT
 
 Tạo cơ sở dữ liệu:
 1. Tạo bảng Movies để lưu thông tin về phim:
-id: ID của phim
-Name: Tên phim
-Rating: Đánh giá của phim
-Genre: Thể loại phim
-Country: Quốc gia sản xuất
+movie_id: ID của phim
+title: Tên phim
+image: Đường dẫn hình ảnh của phim
+vote_average: Đánh giá của phim
++ có SP_GETTopTenMovies 
 + Module đọc dữ liệu:
 2. Sử dụng Python và FastAPI để tạo một API để lấy dữ liệu từ trang web chuyên về phim như: api.themoviedb.org.
 Mô tả nguồn dữ liệu:
 + Sử dụng Web Scraping hoặc lấy dữ liệu qua API của các trang web chuyên về phim.
-+ Dữ liệu bao gồm thông tin về phim:
++Dữ liệu bao gồm thông tin về phim:
 ID của phim
 Tên phim
 Đánh giá của phim
