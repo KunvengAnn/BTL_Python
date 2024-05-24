@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Movie Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        #chartContainer {
+            position: relative;
+            width: 1500px;
+            height: 500px;
+        }
+
+        #IDimage {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            /*transform: translate(-50%, -50%);*/
+            display: none; /* Initially hide the image */
+        }
+    </style>
+</head>
+<body>
+    <div id="chartContainer">
+        <div id="columnchart_values" style="width: 100%; height: 100%;"></div>
+        <div id="IDimage"></div>
+    </div>
+    <script>
+        function getData() {
+            fetch('api.aspx')
+                .then(response => response.json())
+                .then(data => {
+                    var chartData = [['Title', 'Average Rating']];
+                    data.forEach(movie => {
+                        chartData.push([movie.title, movie.vote_average]);
+                    });
+                    drawChart(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function drawChart(data) {
+            var dataTable = new google.visualization.DataTable();
+            dataTable.addColumn('string', 'Title');
+            dataTable.addColumn('number', 'Average Rating');
+
+            data.forEach(movie => {
+                dataTable.addRow([movie.title, movie.vote_average]);
+            });
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_values'));
+
+            var options = {
+                title: 'Top Movies',
+                width: '100%',
+                height: '100%',
+                bar: { groupWidth: '95%' },
+                legend: { position: 'bottom' },
+                hAxis: {
+                    title: 'Movie',
+                    slantedText: true,
+                    slantedTextAngle: 45,
+                    textStyle: {
+                        fontSize: 10
+                    }
+                }
+            };
+
+            google.visualization.events.addListener(chart, 'onmouseover', function (e) {
+                var movieTitle = dataTable.getValue(e.row, 0);
+                var movie = data.find(movie => movie.title === movieTitle);
+                if (movie) {
+                    var imageURL = 'https://image.tmdb.org/t/p/original' + movie.image;
+                    var imageElement = document.getElementById('IDimage');
+                    imageElement.innerHTML = '<img src="' + imageURL + '" style="width: 200px; height: auto;">';
+                    imageElement.style.display = 'block'; // Show the image
+                }
+            });
+
+            google.visualization.events.addListener(chart, 'onmouseout', function () {
+                document.getElementById('IDimage').style.display = 'none'; // Hide the image
+            });
+
+            chart.draw(dataTable, options);
+        }
+
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(getData);
+    </script>
+</body>
+</html>

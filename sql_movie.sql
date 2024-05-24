@@ -19,42 +19,21 @@ GO
 -- Description:	<Description,,>
 -- =============================================
 CREATE PROCEDURE [dbo].[SP_GETTopTenMovies] 
-    @Action NVARCHAR(50) = 'get_top_by_average_rating'  -- Default to getting top by average rating if no action is provided
 AS
 BEGIN
-    SET NOCOUNT ON;
-
-    IF @Action = 'get_top_by_average_rating'
-    BEGIN
-        -- Get top 10 movies by average rating
-        SELECT TOP 10
-            movie_id,
-            title,
-            image,
-            vote_average
-        FROM
-            movies
-        ORDER BY
-            vote_average DESC;
-    END
-    ELSE IF @Action = 'get_top_by_vote_count'
-    BEGIN
-        -- Get top 10 movies by vote count
-        SELECT TOP 10
-            movie_id,
-            title,
-            image,
-            vote_average
-        FROM
-            movies
-        ORDER BY
-            vote_count DESC; -- Assuming the vote_count field is in the movies table
-    END
-    ELSE
-    BEGIN
-        -- Invalid action provided, return an empty result set
-        SELECT
-            'Invalid action' AS Error;
-    END
+    -- Get top 10 movies by average rating 
+    SELECT TOP 10
+        movie_id,
+        title,
+        image,
+        vote_average
+    FROM
+        movies
+    ORDER BY
+        vote_average DESC
+    FOR JSON PATH;
 END
 GO
+
+
+
